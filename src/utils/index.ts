@@ -1,18 +1,19 @@
 import axios from 'axios';
 
+const API_KEY = import.meta.env.VITE_KEY_API;
 const config = {
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'Bearer'
+    Authorization: `Bearer ${API_KEY}`
   }
 };
 
 export const postPrompt = async ({
-  promp,
+  prompt,
   n,
   size
 }: {
-  promp: string;
+  prompt: string;
   n: number;
   size: '256x256' | '512x512' | '1024x1024';
 }) => {
@@ -20,16 +21,16 @@ export const postPrompt = async ({
     const res = await axios.post(
       'https://api.openai.com/v1/images/generations',
       {
-        promp: promp,
-        n: n,
-        size: size
+        prompt,
+        n,
+        size
       },
       config
     );
-    console.log(promp, n, size);
+
     return Promise.resolve(res);
   } catch (err) {
-    return Promise.resolve(err);
+    console.log(err);
+    throw new Error(err.response.data.error.message);
   }
-  return;
 };

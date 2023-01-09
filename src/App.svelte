@@ -1,47 +1,28 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg';
-  import Counter from './lib/Counter.svelte';
-  import {postPrompt} from './utils';
+  import FormInput from './components/molecules/FormInput.svelte';
 
-  $: inputPromp = '';
+  $: arrayOfImage = [];
 
-  const handleChange = event => {
-    inputPromp += event.target.value;
-  };
-
-  $: console.log(inputPromp);
+  const loaded = new Map();
 </script>
 
-<main>
-  <form
-    on:submit={() =>
-      postPrompt({
-        promp: 'Hello',
-        n: 2,
-        size: '512x512'
-      })}
-  >
-    <input
-      bind:value={inputPromp}
-      on:change={handleChange}
-      placeholder="Masukan Gambar Yang Ingin Anda Buat Disini"
-    />
-  </form>
-</main>
+<div class="main">
+  <FormInput bind:arrayOfImage />
+  <div class="image-list">
+    {#each arrayOfImage as image, i}
+      <img height="500" width="340" class="img" src={image.url} alt={'image'} />
+    {/each}
+  </div>
+</div>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
+  .main {
+    width: 96%;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+  .img {
+    margin: 12px;
   }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
+  .image-list {
+    margin-top: 12px;
   }
 </style>
