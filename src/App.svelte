@@ -1,5 +1,6 @@
 <script lang="ts">
   import FormInput from './components/molecules/FormInput.svelte';
+  import Image from './components/molecules/Image.svelte';
 
   $: arrayOfImage = [];
 
@@ -10,19 +11,30 @@
   <FormInput bind:arrayOfImage />
   <div class="image-list">
     {#each arrayOfImage as image, i}
-      <img height="500" width="340" class="img" src={image.url} alt={'image'} />
+      <Image
+        imageSrc={image.url}
+        blurhash={'LEHV6nWB2yk8pyo0adR*.7kCMdnj'}
+        width={400}
+        height={340}
+      />
+      <!-- <img height="400" width="340" class="img" src={image.url} alt={'image'} /> -->
     {/each}
   </div>
 </div>
 
 <style>
   .main {
-    width: 96%;
+    width: 100%;
+    box-sizing: border-box;
   }
-  .img {
-    margin: 12px;
-  }
+
   .image-list {
-    margin-top: 12px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 </style>

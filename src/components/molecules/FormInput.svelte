@@ -47,7 +47,7 @@
   {/if}
 </section>
 
-<style>
+<style scoped>
   section {
     width: 100%;
   }

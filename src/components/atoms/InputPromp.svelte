@@ -13,6 +13,7 @@
 <style>
   .input {
     padding: 12px;
+    box-sizing: border-box;
     border-radius: 24px;
     width: 100%;
     border: 1px solid gray;
